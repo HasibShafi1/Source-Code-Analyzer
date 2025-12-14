@@ -3,6 +3,9 @@
 A web-based tool for analyzing C-like source code, demonstrating compiler design principles including Lexical, Syntax, and Semantic analysis.
 
 ## 🚀 Project Overview
+<img width="1916" height="969" alt="image" src="https://github.com/user-attachments/assets/ed1fb957-7e61-4bde-b9bf-6dea222a2753" />
+
+
 
 This project splits the responsibility of code analysis and user interface into two distinct layers:
 1.  **Core Analysis (Backend)**: Written in **C++** for performance and explicit control over memory and logic.
