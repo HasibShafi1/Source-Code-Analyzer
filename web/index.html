@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Source Code Analyzer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Source Code Analyzer</h1>
+            <p>Lexical, Syntax, and Semantic Analysis</p>
+        </header>
+
+        <main>
+            <section class="editor-section">
+                <div class="header-actions">
+                    <h2>Source Code</h2>
+                    <div class="sample-buttons">
+                        <span class="sample-label">Load Sample:</span>
+                        <button class="sample-btn" data-key="valid">Valid</button>
+                        <button class="sample-btn" data-key="syntax">Syntax Error</button>
+                        <button class="sample-btn" data-key="semantic">Semantic Error</button>
+                        <button class="sample-btn" data-key="lexical">Lexical Error</button>
+                    </div>
+                </div>
+                <textarea id="sourceCode" spellcheck="false" placeholder="Enter your C-like code here...">
+int x = 10;
+if (x > 5) {
+    int y = x + 1;
+}
+int z = x + y; // Semantic error expected
+</textarea>
+                <button id="analyzeBtn">Analyze Code</button>
+            </section>
+
+            <section class="results-section" id="resultsSection" style="display: none;">
+                <h2>Analysis Results</h2>
+
+                <div class="tabs">
+                    <button class="tab-btn active" data-tab="tokens">Tokens</button>
+                    <button class="tab-btn" data-tab="symbolTable">Symbol Table</button>
+                    <button class="tab-btn" data-tab="syntaxErrors">Syntax Errors</button>
+                    <button class="tab-btn" data-tab="semanticErrors">Semantic Errors</button>
+                </div>
+
+                <div class="tab-content active" id="tokens">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Line</th>
+                                <th>Type</th>
+                                <th>Value</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tokensTableWithReq"></tbody>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="symbolTable">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Line</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody id="symbolTableBody"></tbody>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="syntaxErrors">
+                    <ul id="syntaxErrorsList" class="error-list"></ul>
+                </div>
+
+                <div class="tab-content" id="semanticErrors">
+                    <ul id="semanticErrorsList" class="error-list"></ul>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

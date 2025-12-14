@@ -1,0 +1,18 @@
+# Binaries
+*.exe
+*.obj
+*.o
+*.dll
+
+# IDE/System
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+
+# Node (just in case)
+node_modules/
