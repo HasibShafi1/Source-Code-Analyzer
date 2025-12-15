@@ -68,6 +68,7 @@ Token Lexer::scanToken() {
         case '/': 
             if (peek() == '/') {
                 // Single-line comment
+                advance(); // consume second /
                 std::string content = "//";
                 while (peek() != '\n' && !isAtEnd()) {
                     content += advance();

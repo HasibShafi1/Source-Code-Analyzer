@@ -169,6 +169,15 @@ td {
     text-align: left;
     padding: 12px;
     border-bottom: 1px solid var(--border-color);
+    vertical-align: top;
+    /* Align to top for multi-line */
+}
+
+td {
+    white-space: pre-wrap;
+    /* Preserve newlines */
+    font-family: 'Consolas', monospace;
+    /* Monospace for alignment */
 }
 
 th {
