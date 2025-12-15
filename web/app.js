@@ -116,6 +116,17 @@ int c = a + b;`
             </tr>
         `).join('');
 
+        // Comments
+        const commentsBody = document.getElementById('commentsTableBody');
+        if (data.comments) {
+            commentsBody.innerHTML = data.comments.map(c => `
+                <tr>
+                    <td>${c.line}</td>
+                    <td style="color: #6a9955; font-family: monospace;">${escapeHtml(c.value)}</td>
+                </tr>
+            `).join('');
+        }
+
         // Syntax Errors
         const syntaxList = document.getElementById('syntaxErrorsList');
         if (data.syntaxErrors.length === 0) {
@@ -135,6 +146,9 @@ int c = a + b;`
         // Update tab counts if desired (optional)
         document.querySelector('[data-tab="syntaxErrors"]').textContent = `Syntax Errors (${data.syntaxErrors.length})`;
         document.querySelector('[data-tab="semanticErrors"]').textContent = `Semantic Errors (${data.semanticErrors.length})`;
+        if (data.comments) {
+            document.querySelector('[data-tab="comments"]').textContent = `Comments (${data.comments.length})`;
+        }
     }
 
     function escapeHtml(text) {

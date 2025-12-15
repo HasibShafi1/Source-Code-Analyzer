@@ -42,8 +42,16 @@ int main() {
     std::vector<Token> tokens = lexer.tokenize();
 
     // 2. Syntax & Semantic Analysis
+    // Filter out comments for the parser
+    std::vector<Token> parserTokens;
+    for (const auto& t : tokens) {
+        if (t.type != COMMENT) {
+            parserTokens.push_back(t);
+        }
+    }
+
     SymbolTable symTable;
-    Parser parser(tokens, symTable);
+    Parser parser(parserTokens, symTable);
     parser.parse();
 
     std::vector<std::string> syntaxErrors = parser.getSyntaxErrors();
@@ -75,6 +83,18 @@ int main() {
         std::cout << "\n";
     }
     std::cout << "  ],\n";
+
+    // Comments
+    std::cout << "  \"comments\": [\n";
+    bool firstComment = true;
+    for (const auto& t : tokens) {
+        if (t.type == COMMENT) {
+            if (!firstComment) std::cout << ",\n";
+            std::cout << "    { \"value\": \"" << jsonEscape(t.value) << "\", \"line\": " << t.line << " }";
+            firstComment = false;
+        }
+    }
+    std::cout << "\n  ],\n";
 
     // Semantic Errors
     std::cout << "  \"semanticErrors\": [\n";

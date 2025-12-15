@@ -68,24 +68,26 @@ Token Lexer::scanToken() {
         case '/': 
             if (peek() == '/') {
                 // Single-line comment
-                while (peek() != '\n' && !isAtEnd()) advance();
-                skipWhitespace(); // Consumes the \n and following whitespace
-                if (isAtEnd()) return {END_OF_FILE, "", line};
-                return scanToken(); // Recursively scan next token
+                std::string content = "//";
+                while (peek() != '\n' && !isAtEnd()) {
+                    content += advance();
+                }
+                // Don't consume the newline here, let skipWhitespace handle it in next loop
+                return {COMMENT, content, line};
             } else if (peek() == '*') {
                 // Multi-line comment
+                std::string content = "/*";
                 advance(); // consume *
                 while (!isAtEnd()) {
                     if (peek() == '*' && peek(1) == '/') {
                         advance(); advance(); // consume */
+                        content += "*/";
                         break;
                     }
                     if (peek() == '\n') line++;
-                    advance();
+                    content += advance();
                 }
-                skipWhitespace(); // Consumes potential whitespace after */
-                if (isAtEnd()) return {END_OF_FILE, "", line};
-                return scanToken(); // Recursively scan next token
+                return {COMMENT, content, line};
             }
             return {OPERATOR, "/", line};
         case '(': return {SEPARATOR, "(", line};

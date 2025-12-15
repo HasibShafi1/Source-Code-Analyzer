@@ -43,6 +43,7 @@ int z = x + y; // Semantic error expected
 
                 <div class="tabs">
                     <button class="tab-btn active" data-tab="tokens">Tokens</button>
+                    <button class="tab-btn" data-tab="comments">Comments</button>
                     <button class="tab-btn" data-tab="symbolTable">Symbol Table</button>
                     <button class="tab-btn" data-tab="syntaxErrors">Syntax Errors</button>
                     <button class="tab-btn" data-tab="semanticErrors">Semantic Errors</button>
@@ -58,6 +59,18 @@ int z = x + y; // Semantic error expected
                             </tr>
                         </thead>
                         <tbody id="tokensTableWithReq"></tbody>
+                    </table>
+                </div>
+
+                <div class="tab-content" id="comments">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Line</th>
+                                <th>Content</th>
+                            </tr>
+                        </thead>
+                        <tbody id="commentsTableBody"></tbody>
                     </table>
                 </div>
 

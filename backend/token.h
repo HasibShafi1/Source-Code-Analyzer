@@ -9,6 +9,7 @@ enum TokenType {
     NUMBER,
     OPERATOR,
     SEPARATOR,
+    COMMENT,
     UNKNOWN,
     END_OF_FILE
 };
@@ -25,6 +26,7 @@ struct Token {
             case NUMBER: return "NUMBER";
             case OPERATOR: return "OPERATOR";
             case SEPARATOR: return "SEPARATOR";
+            case COMMENT: return "COMMENT";
             case UNKNOWN: return "UNKNOWN";
             case END_OF_FILE: return "EOF";
             default: return "UNKNOWN";
