@@ -32,17 +32,21 @@ int z = y;
 int $invalid = 20; 
 /* Error: '$' is not a valid character 
    for identifiers in this language */`,
-        comments: `// Single-line comment example
-int a = 5; // Inline comment
+        comments: `// Normal comment
+int a = 10;
+
+// Code commented out below:
+// int x = 50;
+// float y = 20.5;
 
 /* 
-   Multi-line comment block
-   Variables below should be parsed correctly
+   Block comment hiding code:
+   if (a > 5) {
+       return 0;
+   }
 */
-int b = 10;
 
-// simple calculation
-int c = a + b;`
+int b = 20;`
     };
 
     sampleButtons.forEach(btn => {
