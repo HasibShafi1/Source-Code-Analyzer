@@ -65,7 +65,29 @@ Token Lexer::scanToken() {
         case '+': return {OPERATOR, "+", line};
         case '-': return {OPERATOR, "-", line};
         case '*': return {OPERATOR, "*", line};
-        case '/': return {OPERATOR, "/", line};
+        case '/': 
+            if (peek() == '/') {
+                // Single-line comment
+                while (peek() != '\n' && !isAtEnd()) advance();
+                skipWhitespace(); // Consumes the \n and following whitespace
+                if (isAtEnd()) return {END_OF_FILE, "", line};
+                return scanToken(); // Recursively scan next token
+            } else if (peek() == '*') {
+                // Multi-line comment
+                advance(); // consume *
+                while (!isAtEnd()) {
+                    if (peek() == '*' && peek(1) == '/') {
+                        advance(); advance(); // consume */
+                        break;
+                    }
+                    if (peek() == '\n') line++;
+                    advance();
+                }
+                skipWhitespace(); // Consumes potential whitespace after */
+                if (isAtEnd()) return {END_OF_FILE, "", line};
+                return scanToken(); // Recursively scan next token
+            }
+            return {OPERATOR, "/", line};
         case '(': return {SEPARATOR, "(", line};
         case ')': return {SEPARATOR, ")", line};
         case '{': return {SEPARATOR, "{", line};

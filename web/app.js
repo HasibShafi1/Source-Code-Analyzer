@@ -31,7 +31,18 @@ int z = y;
         lexical: `int x = 10;
 int $invalid = 20; 
 /* Error: '$' is not a valid character 
-   for identifiers in this language */`
+   for identifiers in this language */`,
+        comments: `// Single-line comment example
+int a = 5; // Inline comment
+
+/* 
+   Multi-line comment block
+   Variables below should be parsed correctly
+*/
+int b = 10;
+
+// simple calculation
+int c = a + b;`
     };
 
     sampleButtons.forEach(btn => {
